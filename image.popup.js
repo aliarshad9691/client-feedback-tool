@@ -37,7 +37,8 @@ const downloadZip = (imageData, feedbackText, logsData) => {
     uaData.body = {};
     uaData.body.width = document.body.clientWidth;
     uaData.body.height = document.body.clientHeight;
-
+    uaData.context = window.CFContext;
+    
     const zip = new jszip();
     zip.file("feedback.png", imageData.split(",")[1], { base64: true });
     zip.file("browserLogs.txt", makeLogFile(logsData));
@@ -102,7 +103,7 @@ const makeUI = (canvas, logsData) => {
                 <textarea style="width: 100%; height: 100px; box-sizing: border-box;" id="feedback-textarea" placeholder="Leave Comment"></textarea>
                 <div style="display: flex; justify-content: flex-end;">
                     <button style="margin-right:5px; width: 100px; height: 30px; background-color: #fff; color: #000; border: 1px solid #000; border-radius: 5px; cursor: pointer;" id="feedback-button-close">Close</button>
-                    <button style="width: 100px; height: 30px; background-color: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer;" id="feedback-button">Submit</button>
+                    <button style="width: 100px; height: 30px; background-color: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer;" id="feedback-button">Download</button>
                 </div>
             </div>
         </div>

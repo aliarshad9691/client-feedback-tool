@@ -79,4 +79,17 @@ const ClientFeedbackTool = () => {
     setupEvents();
 }
 
-module.exports = ClientFeedbackTool;
+const setContext = (context) => {
+    window.CFContext = window.CFContext || {};
+    window.CFContext = { ...window.CFContext, ...context };
+}
+
+const clearContext = () => {
+    window.CFContext = {};
+}
+
+module.exports = {
+    ClientFeedbackTool,
+    setContext,
+    clearContext
+};
