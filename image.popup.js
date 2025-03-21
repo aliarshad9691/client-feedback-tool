@@ -47,8 +47,15 @@ const downloadZip = (imageData, feedbackText, logsData) => {
         saveAs(blob, "feedback.zip");
     });
 }
+const closePopup = () => {
+    const popup = document.getElementById("image-editor-popup");
+    document.body.removeChild(popup);
+}
 
 const makeUI = (canvas, logsData) => {
+    if (document.getElementById("image-editor-popup")) {
+        return;
+    }
     const link = document.createElement("link");
     link.href = "https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css"
     link.rel = "stylesheet";
@@ -56,8 +63,8 @@ const makeUI = (canvas, logsData) => {
 
     const styles = document.createElement("style");
     styles.innerHTML = `
-        .tui-image-editor-load-btn, .tui-image-editor-download-btn {
-            display: none;
+        #image-editor-popup-image .tui-image-editor-header-buttons {
+            display: none !important;
         }
         .tui-colorpicker-palette-button {
             width: 8px;
@@ -86,7 +93,7 @@ const makeUI = (canvas, logsData) => {
     image.style.height = "100%";
 
     popup.innerHTML = `
-        <div style="height: 100%; width: 100%; flex-grow: 1; display: flex; flex-direction: column; border: 1px solid #000; padding: 10px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); font-family: 'Verdana';" id="image-editor-popup-content">
+        <div style="background-color: #fff; height: 100%; width: 100%; flex-grow: 1; display: flex; flex-direction: column; border: 1px solid #000; padding: 10px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); font-family: 'Verdana';" id="image-editor-popup-content">
             <div style="font-size: 20px; font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 10px;">Leave Feedback</div>
             <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center; overflow: auto;">
                 <div id="image-editor-popup-image"></div>
@@ -94,6 +101,7 @@ const makeUI = (canvas, logsData) => {
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <textarea style="width: 100%; height: 100px; box-sizing: border-box;" id="feedback-textarea" placeholder="Leave Comment"></textarea>
                 <div style="display: flex; justify-content: flex-end;">
+                    <button style="margin-right:5px; width: 100px; height: 30px; background-color: #fff; color: #000; border: 1px solid #000; border-radius: 5px; cursor: pointer;" id="feedback-button-close">Close</button>
                     <button style="width: 100px; height: 30px; background-color: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer;" id="feedback-button">Submit</button>
                 </div>
             </div>
@@ -107,6 +115,11 @@ const makeUI = (canvas, logsData) => {
         const feedbackText = document.getElementById("feedback-textarea").value;
         const imageData = ImageEditorRef.toDataURL();
         downloadZip(imageData, feedbackText, logsData);
+        closePopup();
+    });
+    const closeButton = document.getElementById("feedback-button-close");
+    closeButton.addEventListener("click", () => {
+        closePopup();
     });
 }
 
