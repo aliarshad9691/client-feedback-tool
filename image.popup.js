@@ -39,7 +39,7 @@ const downloadZip = (imageData, feedbackText, logsData) => {
     uaData.body.height = document.body.clientHeight;
 
     const zip = new jszip();
-    zip.file("feedback.png", imageData.split(",")[1]);
+    zip.file("feedback.png", imageData.split(",")[1], { base64: true });
     zip.file("browserLogs.txt", makeLogFile(logsData));
     zip.file("userFeedback.txt", feedbackText);
     zip.file("browserInfo.json", JSON.stringify(uaData));
