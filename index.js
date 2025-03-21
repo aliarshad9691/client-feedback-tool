@@ -40,7 +40,7 @@ const addFeedbackButton = () => {
     feedbackTool.style.border = "1px solid black";
     feedbackTool.style.borderRadius = "5px";
     feedbackTool.style.cursor = "pointer";
-    feedbackTool.style.zIndex = "1000";
+    feedbackTool.style.zIndex = "20000000";
     feedbackTool.style.fontFamily = "Verdana";
     feedbackTool.style.backgroundColor = "white";
 

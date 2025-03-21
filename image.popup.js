@@ -80,7 +80,7 @@ const makeUI = (canvas, logsData) => {
     popup.style.right = "10%";
     popup.style.left = "10%";
     popup.style.bottom = "5%";
-    popup.style.zIndex = "1000";
+    popup.style.zIndex = "20000000";
     popup.style.justifyContent = "center";
     popup.style.alignItems = "center";
     popup.style.display = "flex";
